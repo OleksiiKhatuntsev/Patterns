@@ -1,4 +1,5 @@
 ﻿using Patterns.BehaviouralPatterns.Observer;
+using Patterns.StructuralPatterns.Facade;
 using System;
 
 namespace Patterns
@@ -8,6 +9,7 @@ namespace Patterns
         static void Main(string[] args)
         {
             //CallObserver();
+            CallFacade();
         }
 
         static void CallObserver()
@@ -23,6 +25,18 @@ namespace Patterns
             {
                 stock.Market();
             }
+        }
+
+        static void CallFacade()
+        {
+            CPU cpu = new CPU("Core i5 CPU");
+            MotherBoard motherBoard = new MotherBoard("ASUS ROG");
+            SSD ssd = new SSD("Kingston SSD");
+
+            Facade facade = new Facade(cpu, ssd, motherBoard);
+
+            facade.StartPC();
+            facade.ShutDownPC();
         }
     }
 }
