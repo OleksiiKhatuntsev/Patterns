@@ -7,6 +7,11 @@ namespace Patterns
     {
         static void Main(string[] args)
         {
+            //CallObserver();
+        }
+
+        static void CallObserver()
+        {
             Stock stock = new Stock();
             Broker Tom = new Broker("Tom", stock);
             Broker John = new Broker("John", stock);
