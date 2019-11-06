@@ -1,4 +1,5 @@
-﻿using Patterns.BehaviouralPatterns.Observer;
+﻿using Patterns.BehaviouralPatterns.ChainOfResponsibility;
+using Patterns.BehaviouralPatterns.Observer;
 using Patterns.StructuralPatterns.Facade;
 using System;
 
@@ -9,7 +10,8 @@ namespace Patterns
         static void Main(string[] args)
         {
             //CallObserver();
-            CallFacade();
+            //CallFacade();
+            CallChainOfResponsibility();
         }
 
         static void CallObserver()
@@ -37,6 +39,27 @@ namespace Patterns
 
             facade.StartPC();
             facade.ShutDownPC();
+        }
+
+        static void CallChainOfResponsibility()
+        {
+            var ali = new AliexpressHadler();
+            var rozetka = new RozetkaHandler();
+            var eldom = new EldomHadler();
+            rozetka.SetNext(eldom).SetNext(ali);
+            for(; ; )
+            {
+                Console.WriteLine("Press 1 if you want to buy a new computer");
+                Console.WriteLine("Press 2 if you want to buy govno");
+                Console.WriteLine("Press 3 if you want to buy kitayskoe govno");
+                Console.WriteLine("Press q to quit");
+                string s = Console.ReadLine();
+                if (s == "q")
+                {
+                    break;
+                }
+                Console.WriteLine(Client.ClientCode(rozetka, s));
+            }
         }
     }
 }
